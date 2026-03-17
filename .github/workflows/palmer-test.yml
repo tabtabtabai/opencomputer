@@ -1,0 +1,29 @@
+name: Palmer Tests
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  palmer:
+    name: Palmer E2E
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: tabtabtabai/palmer-action@v1
+        with:
+          prompt: |
+            Verify the OpenComputer dashboard loads correctly.
+            Check that the sign-in page renders.
+            Verify the landing page shows the hero section and key features.
+          branch: ${{ github.event.pull_request.head.ref }}
+          browser-enabled: true
+          timeout: 1800
+        env:
+          PALMER_API_URL: https://api.generalvolition.com
+          PALMER_API_KEY: ${{ secrets.PALMER_API_KEY }}
+          PALMER_SECRET_GITHUB_TOKEN: ${{ github.token }}
