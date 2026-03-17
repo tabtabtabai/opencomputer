@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: tabtabtabai/palmer-action@v1
+      - uses: ./packages/palmer-action
         with:
           prompt: |
             Explore the docs/ directory and read every documentation page (.mdx files). Identify every testable code example and verifiable claim — cover every code snippet, every CLI command, every SDK usage example. For each test, include the source file path and section heading in the name. Be thorough.
@@ -25,3 +25,4 @@ jobs:
           PALMER_API_URL: https://api.generalvolition.com
           PALMER_API_KEY: ${{ secrets.PALMER_API_KEY }}
           PALMER_SECRET_GITHUB_TOKEN: ${{ github.token }}
+          PALMER_SECRET_OPENCOMPUTER_API_KEY: ${{ secrets.OPENCOMPUTER_API_KEY }}
